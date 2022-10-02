@@ -1,0 +1,336 @@
+/*
+    =================================
+    General Admin Styles
+    =================================
+*/
+
+    /* Headers */
+    body.admin header .container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: row; /* Default */
+        flex-wrap: nowrap; /* Default */
+    }
+
+    body.admin header .container > div {
+        display: flex;
+        flex-direction: column;
+
+        width: 100%;
+    }
+
+    body.admin header .left, body.admin header .left h1 {
+        text-align: left;
+    }
+
+    body.admin header .right {
+        text-align: right;
+        line-height: 50px;
+    }
+
+    body.admin #page-title {
+        height: 90px;
+        line-height: 90px;
+        border-bottom: 1px solid #0000FF;
+        text-align: center;
+        background: #fff;
+    }
+
+    header #page-title .container {
+        padding: 0 80px;
+    }
+
+    header #head a.button {
+        border: 1px solid #fff;
+        letter-spacing: 2px;
+        font-size: 16px;
+        line-height: 50px;
+        height: 50px;
+        display: inline-block;
+        color: #fff;
+        font-weight: 400;
+        padding: 0 50px;
+    }
+
+    header #head a.button:hover {
+        border-color: #fff;
+        color: #0000FF;
+        background-color: #fff;
+    }
+
+    .settings-icon {
+        margin-left: 20px;
+        vertical-align: middle;
+    }
+
+    .settings-icon img {
+        width: 18px;
+    }
+
+
+    /* Forms */
+    form > div {
+        padding: 0 0 40px;
+    }
+
+    form > div.location-container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-direction: row; /* Default */
+        flex-wrap: nowrap; /* Default */
+    }
+
+    form > div.location-container > div {
+        display: flex;
+        flex-direction: column;
+    }
+
+    form > div.location-container > div.city-container {
+        width: 60%;
+    }
+
+    form > div.location-container > div.state-container {
+        width: 30%;
+    }
+
+    label {
+        font-size: 20px;
+        line-height: 50px;
+        color: rgba(0,0,0,0.50);
+        display: block;
+    }
+
+    span.required {
+        color: #D0021B;
+    }
+
+    input, textarea {
+        box-sizing: border-box;
+    }
+
+    input {
+        font-family: 'Roboto', sans-serif;
+        font-weight: 300;
+        color: #000;
+        border: 1px solid #D8D8D8;
+        font-size: 28px;
+        letter-spacing: 1px;
+        line-height: 50px;
+        padding: 14px 20px;
+        width: 100%;
+    }
+
+    textarea {
+        font-family: 'Roboto', sans-serif;
+        font-weight: 300;
+        color: #000;
+        border: 1px solid #D8D8D8;
+        font-size: 24px;
+        letter-spacing: 1px;
+        line-height: 48px;
+        padding: 14px 20px;
+        width: 100%;
+    }
+
+    input:focus,
+    select:focus,
+    textarea:focus,
+    button:focus {
+        outline: none;
+    }
+    ::-webkit-input-placeholder {
+        color: rgba(0,0,0,0.40);
+    }
+    ::-moz-placeholder {
+        color: rgba(0,0,0,0.4);
+    }
+    :-ms-input-placeholder {
+        color: rgba(0,0,0,0.4);
+    }
+    :-moz-placeholder {
+        color: rgba(0,0,0,0.4);
+    }
+    input:disabled,
+    textarea:disabled {
+        color: rgba(0,0,0,0.4);
+    }
+
+    button {
+        border: 1px solid #0000FF;
+        cursor: pointer;
+        letter-spacing: 2px;
+        font-size: 16px;
+        line-height: 16px;
+        color: #0000FF;
+        font-weight: 400;
+        padding: 20px 50px;
+    }
+
+    button:hover {
+        border-color: #0000FF;
+        color: #fff;
+        background-color: #0000FF;
+    }
+
+    button.inactive {
+        pointer-events: none;
+        border: 1px solid rgba(0,0,0,0.50);
+        color: rgba(0,0,0,0.50);
+    }
+
+    .login-details {
+        padding: 50px 0 90px;
+    }
+
+    main .container > .login-details {
+        padding: 90px 0 0;
+    }
+
+    #update-preview {
+        cursor: pointer;
+    }
+
+
+
+/*
+    =================================
+    Dashboard
+    =================================
+*/
+    .admin #browse .delete {
+        width: 32px;
+        height: 32px;
+        padding-left: 20px;
+    }
+
+    button.delete_button {
+        width: 32px;
+        height: 32px;
+        background-image: url(../images/trash.png);
+        background-color: transparent;
+        display: inline-block;
+        background-size: 32px 32px;
+        background-position: center;
+        padding: 0;
+        border: 0;
+    }
+    
+    button.delete_button:hover {
+        background-image: url(../images/trash-hover.png);
+    }
+
+
+/*
+    =================================
+    Add Job & Add Users
+    =================================
+*/
+
+    main#add-job {
+        position: fixed;
+        z-index: 1;
+        max-height: 100%;
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: row; /* Default */
+        flex-wrap: nowrap; /* Default */
+
+        padding: 170px 0 0;
+    }
+
+    main#add-job > div {
+        display: flex;
+        align-self: end;
+        justify-content: center;
+        flex-direction: column;
+
+        width: 50%;
+        padding: 90px 80px 0;
+        box-sizing: border-box;
+    }
+
+    main#add-job > div .container {
+        padding: 0;
+        width: 100%;
+        height: 100%;
+    }
+
+    main .container > .description {        
+        padding: 0 0 80px;
+        text-align: center;
+    }
+
+    #form-container {
+        overflow: scroll;
+        height: calc(100vh - 170px - 20px);
+        border-right: 1px solid #0000FF;
+    }
+
+    #preview-container, #users-container {
+        overflow: scroll;
+        height: calc(100vh - 170px - 20px);
+    }
+
+
+    /* Preview Container */
+    #preview-container ul li {
+        padding: 0 0 60px 20px;
+        border-bottom: 0;
+    }
+
+    #preview-container .job-description {
+        padding: 40px 0 60px;
+    }
+
+    #preview-container h2.job-details {
+        font-size: 24px;
+        line-height: 56px;
+        padding-bottom: 90px;
+    }
+
+    #preview-container p {
+        font-size: 28px;
+        line-height: 56px;
+        padding-bottom: 50px;
+    }
+
+
+    /* Users Container */
+    #users-container ul li {
+        padding: 20px 0;
+    }
+
+    #users-container ul li:first-child {
+        padding: 0 0 20px;
+    }
+
+    #users-container p {
+        font-size: 28px;
+        line-height: 50px;
+    }
+
+
+/*
+    =================================
+    Add Job & Add Users
+    =================================
+*/
+
+    main#login {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: row; /* Default */
+        flex-wrap: nowrap; /* Default */
+
+        padding: 170px 0 0;
+    }
+
+    main#login .container {
+        max-width: 560px;
+        width: 100%;
+    }

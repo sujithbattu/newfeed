@@ -1,0 +1,31 @@
+<!-- load static files -->
+{% load static %}
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="bootstrap/js/bootstrap.min.js"></script>
+    <script src="https://npmcdn.com/isotope-layout@3.0/dist/isotope.pkgd.min.js"></script>
+    <script>
+        $('.grid').isotope({
+          itemSelector: '.grid-item',
+          masonry: {
+            columnWidth: 200,
+            isFitWidth: true
+          }
+        });
+        $("#inpt_search").on('focus', function () {
+	$(this).parent('label').addClass('active');
+});
+
+$("#inpt_search").on('blur', function () {
+	if($(this).val().length == 0)
+		$(this).parent('label').removeClass('active');
+});
+    </script>
+        <script src="{% static 'js/app.js' %}"></script>
+        {% if 'admin' in request.path %}
+        <script src="{% static 'js/admin.js' %}"></script>
+        {% endif %}
+    </body>
+
+</html>

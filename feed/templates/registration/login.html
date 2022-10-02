@@ -1,0 +1,68 @@
+<!-- jobs/templates/admin/create.html -->
+
+<!-- load static files -->
+{% load static %}
+
+{% include "_includes/header.html" %}
+
+        <header>
+            <div id="head">
+                <div class="container">
+                    <div class="left">
+                        <h1><a href="/">JobsJobsJobs</a></h1>
+                    </div>
+                    <div>
+                        <h1>Admin</h1>
+                    </div>
+                    <div></div>
+                </div>
+            </div>
+
+            <div id="page-title">
+                <div class="container">
+                    <div class="left"></div>
+                    <div>
+                        Log In
+                    </div>
+                    <div></div>
+                </div>
+            </div>
+        </header>
+
+        <main id="login">
+
+            <div id="login-container" class="container">
+                <div class="form-container">
+                    <form id="login-form" method="post" action="{% url 'login' %}">{% csrf_token %}
+                        <div>
+                            <label for="id_username">
+                                Username
+                            </label>
+
+                            <input id="id_username" name="username" type="text" class="form-control">
+                        </div>
+
+                        <div>
+                            <label for="id_password">
+                                Password
+                            </label>
+                            
+                            <input id="id_password" name="password" type="password" class="form-control">
+                        </div>
+
+                        {% if form.errors %}
+                            <p class=" label label-danger">
+                                Your username and password didn't match. 
+                                Please try again.
+                            </p>
+                        {% endif %}
+
+                        <button type="submit" class="btn btn-primary pull-right">Log In</button>
+                        <input type="hidden" name="next" value="{{ next }}" />
+                    </form>
+                </div>
+            </div>
+
+        </main>
+
+{% include "_includes/footer.html" %}

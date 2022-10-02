@@ -1,0 +1,67 @@
+<!-- jobs/templates/index.html -->
+
+<!-- load static files -->
+{% load static %}
+
+{% include "_includes/header.html" %}
+
+        <header>
+            <div id="head">
+                <div class="container">
+                    <h1>VURB</h1>
+                </div>
+            </div>
+        </header>
+
+        <main id="browse">
+            <div class="container">
+            <div class="cntr">
+	<div class="cntr-innr">
+
+        <form type="get" action="/search/" method="GET">
+	  <label class="search" for="inpt_search">
+			<input name="search_box" id="inpt_search" type="text" />
+		</label>
+            </form>
+
+	</div>
+</div>
+                <div class="filter-container">
+
+                    <div class="description">
+                        <span>
+                        {% if articles %}
+                            {{ articles.count }}
+                        {% else %}
+                            0
+                        {% endif %}
+                        </span>
+                        {% if articles.count == 1 %}
+                            article
+                        {% else %}
+                            articles
+                        {% endif %}
+                        available
+                    </div>
+                </div>
+            <section class="masonary">
+                <div class="grid">
+                    {% if articles %}
+                        {% for article in articles %}
+                            <div class="grid-item">
+                        <a href="/details/{{ article.pk }}">
+                            <div id="content" style="background-image: url({{ article.image_url }}); background-size: cover;">
+                                <div style= "position: absolute;width: 100%; height: 200px; display: inline; bottom: 0px; left: -0px;
+                                background-image: linear-gradient(to bottom, rgba({{ article.dominant_color }}, 0),rgba({{ article.dominant_color }},0.9), rgba({{ article.dominant_color }},1))"></div>
+                                <h1 style="color:rgb({{ article.contrast_color }})">{{ article.title }}</h1>
+                            </div>
+                        </a>
+                            </div>
+                        {% endfor %}
+                    {% endif %}
+                </div>
+            </section>
+            </div>
+        </main>
+
+{% include "_includes/footer.html" %}

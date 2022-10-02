@@ -1,0 +1,99 @@
+<!-- jobs/templates/admin/create.html -->
+
+<!-- load static files -->
+{% load static %}
+
+{% include "_includes/header.html" %}
+
+        <header>
+            <div id="head">
+                <div class="container">
+                    <div class="left">
+                        <h1><a href="/">JobsJobsJobs</a></h1>
+                    </div>
+                    <div>
+                        <h1><a href="/admin">Admin</a></h1>
+                    </div>
+                    <div></div>
+                </div>
+            </div>
+
+            <div id="page-title">
+                <div class="container">
+                    <div class="left">
+                        <a href="/admin">Back</a>
+                    </div>
+                    <div>
+                        Settings
+                    </div>
+                    <div></div>
+                </div>
+            </div>
+        </header>
+
+        <main id="add-job">
+            <div id="form-container">
+                <div class="container">
+                    <div class="description">
+                        Add New Admin
+                    </div>
+
+                    <form name="form" id="add-user-form" method="post" action="/admin/add_user">{% csrf_token %}
+
+                        <div>
+                            <label class="form-label" for="username">
+                                Create Username<span class="required">*</span>
+                            </label>
+
+                            <input name="username" autocomplete="off" id="username" type="text" value="" placeholder="" autofocus required/>
+                        </div>
+
+                        
+                        <div>
+                            <label class="form-label" for="password">
+                                Create Password<span class="required">*</span>
+                            </label>
+
+                            <input name="password" autocomplete="off" id="password" type="text" value="" placeholder="" autofocus required/>
+                        </div>
+
+                        <div>
+                            <button type="submit" class="save_button">Submit</button>
+                        </div>
+
+                        <div class="login-details">
+                            Logged in as {{ user }}. <a href="/admin/logout/">Log Out</a>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+
+            <div id="users-container">
+                <div class="container">
+                    <div class="description">
+                        Admins
+                    </div>
+
+                    {% if admin_users %}
+                    <ul>
+                        {% for admin_user in admin_users %}
+                        <li>
+                            <p>{{ admin_user }}</p>
+
+                            {% if admin_user != user %}
+                            <div class="delete">
+                                <form name="form" id="delete-user-form" method="post" action="/admin/delete_user">{% csrf_token %}
+                                    <input name="user_id" id="user_id" type="hidden" value="{{ admin_user.pk }}"/>
+                                    <button type="submit" class="delete_button"></button>
+                                </form>
+                            </div>
+                            {% endif %}
+                        </li>
+                        {% endfor %}
+                    </ul>
+                    {% endif %}
+            </div>
+        </main>
+
+{% include "_includes/footer.html" %}

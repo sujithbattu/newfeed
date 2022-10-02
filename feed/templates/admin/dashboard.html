@@ -1,0 +1,73 @@
+<!-- jobs/templates/admin/dashboard.html -->
+
+<!-- load static files -->
+{% load static %}
+
+{% include "_includes/header.html" %}
+
+        <header>
+            <div id="head">
+                <div class="container">
+                    <div class="left">
+                        <h1><a href="/">JobsJobsJobs</a></h1>
+                    </div>
+                    <div>
+                        <h1>Admin</h1>
+                    </div>
+                    <div class="right">
+                        <div>
+                            <a href="/admin/create" class="button">Add Job</a><a href="/admin/settings" class="settings-icon"><img src="{% static 'images/settings.png'%}"></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            {% include "_includes/menu-filter.html" %}
+        </header>
+
+
+        <main id="browse">
+            <div class="container">
+                <div class="filter-container">
+                    <div class="description">
+                        <span>{% if jobs %}{{ jobs.count }}{% else %}0{% endif %}</span> job{% if jobs %}{% if jobs.count > 1 %}s{% endif %}{% endif %} in New York
+                    </div>
+
+                    <div class="sort">
+                        <!-- Most Recent -->
+                    </div>
+                </div>
+
+                <ul>
+                    {% if jobs %}
+                    {% for job in jobs %}
+                    <li id="job-{{ job.pk }}">
+                        <div class="job-logo">
+                            <img src="{% if job.company.logo_url %}{{ job.company.logo_url }}{% else %}{% static 'images/logo-placeholder.png'%}{% endif %}">
+                        </div>
+                        <div class="job-title">
+                            <h1>{{ job.title }}</h1>
+                            <h2>{{ job.company.name }} — {{ job.city }}, {{ job.state }}</h2>
+                        </div>
+                        <div class="job-link">
+                            <a href="/admin/edit/{{ job.id }}" class="job-button">Edit</a>
+                        </div>
+                        <div class="delete">
+                            <form name="form" id="job-listing-delete-form" method="post" action="/admin/delete">{% csrf_token %}
+                                <input name="job_id" id="job_id" type="hidden" value="{{ job.pk }}"/>
+                                <button type="submit" class="delete_button"></button>
+                            </form>
+                        </div>
+                    </li>
+                    {% endfor %}
+                    {% endif %}
+                </ul>
+
+                <div class="login-details">
+                    Logged in as {{ user }}. <a href="{% url 'logout' %}">Log Out</a>
+                </div>
+
+            </div>
+        </main>
+
+{% include "_includes/footer.html" %}

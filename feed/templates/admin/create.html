@@ -1,0 +1,162 @@
+<!-- jobs/templates/admin/create.html -->
+
+<!-- load static files -->
+{% load static %}
+
+{% include "_includes/header.html" %}
+
+        <header>
+            <div id="head">
+                <div class="container">
+                    <div class="left">
+                        <h1><a href="/">JobsJobsJobs</a></h1>
+                    </div>
+                    <div>
+                        <h1><a href="/admin/dashboard">Admin</a></h1>
+                    </div>
+                    <div></div>
+                </div>
+            </div>
+
+            <div id="page-title">
+                <div class="container">
+                    <div class="left">
+                        <a href="/admin/dashboard">Back</a>
+                    </div>
+                    <div>
+                        {% if edit_mode %}Edit{% else %}Add{% endif %} Job
+                    </div>
+                    <div></div>
+                </div>
+            </div>
+        </header>
+
+        <main id="add-job">
+            <div id="form-container">
+                <div class="container">
+                    <div class="description">
+                        Job Form
+                    </div>
+
+                    <form name="form" id="job-listing-form" {% if edit_mode %}class="edit-form"{% endif %} method="post" action="/admin/post">{% csrf_token %}
+
+                        <div>
+                            <label class="form-label" for="company_name">
+                                Company Name<span class="required">*</span>
+                            </label>
+
+                            <input name="company_name" id="company_name" type="text" value="{% if edit_mode %}{{ job.company.name }}{% endif %}" placeholder="Add company name"{% if edit_mode %} disabled{% endif %} autocomplete="company_name" spellcheck="true" autofocus required/>
+                        </div>
+
+                        {% if not edit_mode %}
+                        <div>
+                            <label class="form-label" for="company_logo_url">
+                                Company Logo URL
+                            </label>
+                            
+                            <input name="company_logo_url" id="company_logo_url" type="text" value="{% if edit_mode %}{{ job.company.logo_url }}{% endif %}" placeholder="http://..." autocomplete="company_logo_url" spellcheck="true" autofocus/>
+                        </div>
+                        {% endif %}
+
+                        <div class="location-container">
+                            <div class="city-container">
+                                <label class="form-label" for="location_city">
+                                    City<span class="required">*</span>
+                                </label>
+
+                                <input name="location_city" id="location_city" type="text" value="{% if edit_mode %}{{ job.city }}{% endif %}" placeholder="Add city" autocomplete="location_city" spellcheck="true" autocapitalize="words" autofocus required/>
+                            </div>
+
+                            <div class="state-container">
+                                <label class="form-label" for="location_state">
+                                    State<span class="required">*</span>
+                                </label>
+
+                                <input name="location_state" id="location_state" type="text" value="{% if edit_mode %}{{ job.state }}{% endif %}" placeholder="State" autocomplete="location_state" spellcheck="true" autocapitalize="words" autofocus required/>
+                            </div>
+                        </div>
+
+                        <div>
+                            <label class="form-label" for="job_title">Job Title<span class="required">*</span></label>
+                            <input name="job_title" id="job_title" type="text" value="{% if edit_mode %}{{ job.title }}{% endif %}" placeholder="Add job title" autocomplete="job_title" spellcheck="true" autocapitalize="words" autofocus required/>
+                        </div>
+
+                        <div>
+                            <label class="form-label" for="job_link">
+                                Link On Website
+                            </label>
+                            
+                            <input name="job_link" id="job_link" type="url" value="{% if edit_mode %}{{ job.link }}{% endif %}" placeholder="http://..." autocomplete="job_link" spellcheck="true" autofocus/>
+                        </div>
+
+                        <div>
+                            <label class="form-label" for="job_description">Description<span class="required">*</span></label>
+                            <textarea data-autoresize name="job_description" placeholder="Add job description." id="job_description" autocapitalize="sentences" rows="5" required>{% if edit_mode %}{{ job.description }}{% endif %}</textarea>
+                        </div>
+
+                        <div>
+                            {% if edit_mode %}
+                            <input name="job_id" id="job_id" type="hidden" value="{{ job.pk }}"/>
+                            {% endif %}
+                            <button type="submit" class="save_button">{% if edit_mode %}Save & Publish{% else %}Publish{% endif %}</button>
+                        </div>
+
+                        <div class="login-details">
+                            Logged in as {{ user }}. <a href="{% url 'logout' %}">Log Out</a>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+
+            <div id="preview-container">
+                <div class="container">
+                    <div class="description">
+                        <a id="update-preview">Update Preview</a>
+                    </div>
+
+                    <ul>
+                        <li>
+                            <div class="job-logo">
+                                <img src="{% if job.company.logo_url %}{{ job.company.logo_url }}{% else %}{% static 'images/logo-placeholder.png'%}{% endif %}">
+                            </div>
+                            <div class="job-title">
+                                <h1>{% if edit_mode %}{{ job.title }}{% else %}Job Title{% endif %}</h1>
+
+                                <h2>{% if edit_mode %}
+                                    <span class="company-name">{{ job.company.name }}</span> —
+                                    <span class="location-city">{{ job.city }}</span>,
+                                    <span class="location-state">{{ job.state }}</span>
+                                {% else %}
+                                    <span class="company-name">Company Name</span> —
+                                    <span class="location-city">City</span>,
+                                    <span class="location-state">State</span>
+                                {% endif %}</h2>
+                            </div>
+                        </li>
+                    </ul>
+
+                    <div class="job-description">
+                        {% if edit_mode %}
+                        <p>
+                            {{ job.description }}
+                        </p>
+                        {% else %}
+                        <p>
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                        </p>
+                        <p>
+                            Quisque ut dolor et leo varius ultricies. Nullam sit amet nibh eget orci pretium consectetur. Sed et elit sit amet ligula bibendum vehicula eget eget sem. Nunc massa turpis, laoreet a nibh ut, varius vulputate orci.
+                        </p>
+                        <p>
+                            Nam rhoncus, neque vitae interdum elementum, erat ex vehicula orci, sit amet vulputate lectus felis consectetur quam. Proin nec lectus tellus. Pellentesque eget dictum sapien.
+                        </p>
+                        {% endif %}
+                    </div>
+
+                    <h2 class="job-details">Posted: {% if edit_mode %}{{ job.date_added|date:"F j, Y" }}{% else %}{% now "F j, Y" %}{% endif %}</h2>
+                </div>
+            </div>
+        </main>
+
+{% include "_includes/footer.html" %}
